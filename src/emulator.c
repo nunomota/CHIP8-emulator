@@ -33,6 +33,8 @@ void runChip(chip8* chip) {
     //decode opcode
     switch(chip->opcode & 0xF000) {
         int auxiliary_var;
+        int x, y, vx, vy;
+        unsigned int height, pixel_value;
         case 0x0000:
             switch(chip->opcode & 0x00FF) {
                 case 0x00E0:    //00E0, clears the screen
@@ -171,9 +173,9 @@ void runChip(chip8* chip) {
             chip->v_reg[0xF] &= 0;
            
             for(y = 0; y < height; y++) {
-                pixel = chip->memory[chip->I + y];
+                pixel_value = chip->memory[chip->I + y];
                 for(x = 0; x < 8; x++) {
-                    if(pixel & (0x80 >> x) != 0) {
+                    if((pixel_value & (0x80 >> x)) != 0) {
                         if(chip->display[x+vx+(y+vy)*64] != 0) {
                             chip->v_reg[0xF] = 1;
                         }
