@@ -1,3 +1,5 @@
+#include <string.h>
+
 #define CHIP_MEMORY     4096                //in bytes
 #define V_REGISTERS     16                  //total number of 'v' registers
 #define STACK_SIZE      16
