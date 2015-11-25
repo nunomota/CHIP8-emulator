@@ -25,3 +25,4 @@ typedef struct {
 } chip8;
 
 void initChip(chip8* chip);
+void runChip(chip8* chip);

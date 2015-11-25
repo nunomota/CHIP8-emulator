@@ -5,6 +5,7 @@ int main() {
     chip8 chip;
 
     initChip(&chip);
+    runChip(&chip);
     return 0;
 }
 
@@ -22,4 +23,8 @@ void initChip(chip8* chip) {
     memset(chip->display, 0, DISPLAY_SIZE*sizeof(unsigned char));
     chip->display_width = DISPLAY_WIDTH;
     chip->display_height = DISPLAY_HEIGHT;
+}
+
+void runChip(chip8* chip) {
+
 }
