@@ -30,4 +30,25 @@ void runChip(chip8* chip) {
     //fetch opcode
     chip->opcode = (chip->memory[chip->pc] << 8) | chip->memory[chip->pc+1];
 
+    //decode opcode
+    switch(chip->opcode & 0xF000) {
+        case 0x0000:
+            switch(chip->opcode & 0x00FF) {
+                case 0x00E0:    //00E0, clears the screen
+                    memset(chip->display, 0, DISPLAY_SIZE*sizeof(unsigned char));
+                    chip->pc += 2;
+                break;
+                case 0x00EE:    //00EE, returns from a subroutine
+                    chip->pc = chip->stack[(--chip->stack_ptr)&0xF] + 2;
+                break;
+                default:        //0NNN, calls RCA 1802 program at address NNN
+                    //TODO implement this opcode
+                    chip->pc += 2;
+                break;
+            }
+        default:
+            printf("OP code %04X is not supported", chip->opcode);
+        break;
+    }
+
 }
