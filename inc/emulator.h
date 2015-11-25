@@ -21,3 +21,5 @@ typedef struct {
     unsigned int display_width;
     unsigned int display_height;
 } chip8;
+
+void initChip();
