@@ -164,6 +164,25 @@ void runChip(chip8* chip) {
             chip->v_reg[(chip->opcode & 0x0F00) >> 8] = rand() & (chip->opcode & 0x00FF);
             chip->pc += 2;
         break;
+        case 0xD000:        //DXYN, sprites stored in memory at location in index register (I), 8bits wide. Wraps around the screen. If when drawn, clears a pixel, register VF is set to 1 otherwise it is zero. All drawing is XOR drawing (i.e. it toggles the screen pixels). Sprites are drawn starting at position VX, VY. N is the number of 8bit rows that need to be drawn. If N is greater than 1, second line continues at position VX, VY+1, and so on...
+            vx = chip->v_reg[(chip->opcode & 0x0F00) >> 8];
+            vy = chip->v_reg[(chip->opcode & 0x00F0) >> 4];
+            height = chip->opcode & 0x000F;  
+            chip->v_reg[0xF] &= 0;
+           
+            for(y = 0; y < height; y++) {
+                pixel = chip->memory[chip->I + y];
+                for(x = 0; x < 8; x++) {
+                    if(pixel & (0x80 >> x) != 0) {
+                        if(chip->display[x+vx+(y+vy)*64] != 0) {
+                            chip->v_reg[0xF] = 1;
+                        }
+                        chip->display[x+vx+(y+vy)*64] ^= 1;
+                    }
+                }
+            }
+            chip->pc += 2;
+        break;
         default:
             unsupportedOpCode(chip->opcode);
         break;
