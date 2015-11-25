@@ -49,6 +49,10 @@ void runChip(chip8* chip) {
         case 0x1000:        //1NNN, jumps to address NNN
             chip->pc = chip->opcode & 0x0FFF;
         break;
+        case 0x2000:        //2NNN, calls subroutine at NNN
+            chip->stack[(chip->stack_ptr++)&0xF] = chip->pc;
+            chip->pc = chip->opcode & 0x0FFF;
+        break;
         default:
             printf("OP code %04X is not supported", chip->opcode);
         break;
