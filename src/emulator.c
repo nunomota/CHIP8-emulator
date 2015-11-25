@@ -153,6 +153,10 @@ void runChip(chip8* chip) {
                 chip->pc += 2;
             }
         break;
+        case 0xA000:        //ANNN, sets I to the address NNN
+            chip->I = chip->opcode & 0x0FFF;
+            chip->pc += 2;
+        break;
         default:
             unsupportedOpCode(chip->opcode);
         break;
