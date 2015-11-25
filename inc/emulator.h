@@ -27,3 +27,4 @@ typedef struct {
 
 void initChip(chip8* chip);
 void runChip(chip8* chip);
+void unsupportedOpCode(unsigned int opcode);

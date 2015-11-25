@@ -142,13 +142,17 @@ void runChip(chip8* chip) {
                     chip->pc += 2;
                 break;
                 default:
-                    printf("OP code %04X is not supported...", chip->opcode);
+                    unsupportedOpCode(chip->opcode);
                 break;
             }
         break;
         default:
-            printf("OP code %04X is not supported", chip->opcode);
+            unsupportedOpCode(chip->opcode);
         break;
     }
 
+}
+
+void unsupportedOpCode(unsigned int opcode) {
+    printf("OP code %04X is not supported", opcode);
 }
