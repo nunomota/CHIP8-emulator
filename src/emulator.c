@@ -157,6 +157,9 @@ void runChip(chip8* chip) {
             chip->I = chip->opcode & 0x0FFF;
             chip->pc += 2;
         break;
+        case 0xB000:        //BNNN, jumps to the address NNN plus V0
+            chip->pc = (chip->opcode & 0x0FFF) + chip->v_reg[0];
+        break;
         default:
             unsupportedOpCode(chip->opcode);
         break;
