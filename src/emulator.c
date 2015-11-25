@@ -74,6 +74,10 @@ void runChip(chip8* chip) {
                 chip->pc += 2;
             }
         break;
+        case 0x6000:        //6XNN, sets VX to NN
+            chip->v_reg[(chip->opcode & 0x0F00) >> 8] = (chip->opcode & 0x00FF);
+            chip->pc += 2;
+        break;
         default:
             printf("OP code %04X is not supported", chip->opcode);
         break;
