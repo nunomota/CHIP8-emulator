@@ -18,6 +18,7 @@ but I might change this in the future.
       - this will avoid the overhead associated with a function call;
       - it is just possible because we are not using, for example, paged memory;
 ___
+
 ### Informational references:
 
    - http://devernay.free.fr/hacks/chip8/C8TECH10.HTM
