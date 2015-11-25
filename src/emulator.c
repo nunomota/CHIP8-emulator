@@ -67,6 +67,13 @@ void runChip(chip8* chip) {
                 chip->pc += 2;
             }
         break;
+        case 0x5000:        //5XY0, skips the next instruction if VX equals VY
+            if(chip->v_reg[(chip->opcode & 0x0F00) >> 8] == chip->v_reg[(chip->opcode & 0x00F0) >> 4]) {
+                chip->pc += 4;
+            } else {
+                chip->pc += 2;
+            }
+        break;
         default:
             printf("OP code %04X is not supported", chip->opcode);
         break;
