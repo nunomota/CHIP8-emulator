@@ -242,8 +242,7 @@ void runChip(chip8* chip) {
                     chip->pc += 2;
                 break;
                 default:
-                    printf("OPCode %04X is not supported...", chip->opcode);
-                    controlledExit(chip_addr, -2);
+                    unsupportedOpCode(chip->opcode);
                 break;
             }
         break;
