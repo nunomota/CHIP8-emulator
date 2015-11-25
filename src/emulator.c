@@ -53,6 +53,13 @@ void runChip(chip8* chip) {
             chip->stack[(chip->stack_ptr++)&0xF] = chip->pc;
             chip->pc = chip->opcode & 0x0FFF;
         break;
+        case 0x3000:        //3XNN, skips the next instruction if VX equals NN
+            if(chip->v_reg[(chip->opcode & 0x0F00) >> 8] == (chip->opcode & 0x00FF)) {
+                chip->pc += 4;
+            } else {
+                chip->pc += 2;
+            }
+        break;
         default:
             printf("OP code %04X is not supported", chip->opcode);
         break;
