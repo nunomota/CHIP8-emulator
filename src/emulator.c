@@ -146,6 +146,13 @@ void runChip(chip8* chip) {
                 break;
             }
         break;
+        case 0x9000:        //9XY0, skips the next instruction if VX doesn't equal VY
+            if(chip->v_reg[(chip->opcode & 0x0F00) >> 8] != chip->v_reg[(chip->opcode & 0x00F0) >> 4]) {
+                chip->pc += 4;
+            } else {
+                chip->pc += 2;
+            }
+        break;
         default:
             unsupportedOpCode(chip->opcode);
         break;
