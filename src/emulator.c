@@ -160,6 +160,10 @@ void runChip(chip8* chip) {
         case 0xB000:        //BNNN, jumps to the address NNN plus V0
             chip->pc = (chip->opcode & 0x0FFF) + chip->v_reg[0];
         break;
+        case 0xC000:        //CXNN, sets VX to the result of a bitwise and operation on a random number and NN
+            chip->v_reg[(chip->opcode & 0x0F00) >> 8] = rand() & (chip->opcode & 0x00FF);
+            chip->pc += 2;
+        break;
         default:
             unsupportedOpCode(chip->opcode);
         break;
