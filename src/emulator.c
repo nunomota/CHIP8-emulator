@@ -28,6 +28,6 @@ void initChip(chip8* chip) {
 void runChip(chip8* chip) {
 
     //fetch opcode
-    chip->opcode = (chip->memory[pc] << 8) | chip->memory[pc+1];
+    chip->opcode = (chip->memory[chip->pc] << 8) | chip->memory[chip->pc+1];
 
 }
