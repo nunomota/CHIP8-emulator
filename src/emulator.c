@@ -185,6 +185,19 @@ void runChip(chip8* chip) {
             }
             chip->pc += 2;
         break;
+        case 0xE000:
+            switch(chip->opcode & 0x000F) {
+                case 0x000E:        //EX9E, skips the next instruction if the key stored in VX is pressed
+                    chip->pc += 2;
+                break;
+                case 0x0001:        //EXA1, skips the next instruction if the key stored in VX isn't pressed
+                    chip->pc += 2;
+                break;
+                default:
+                    unsupportedOpCode(chip->opcode);
+                break;
+            }
+        break;
         default:
             unsupportedOpCode(chip->opcode);
         break;
