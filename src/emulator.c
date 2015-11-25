@@ -32,7 +32,7 @@ void runChip(chip8* chip) {
 
     //decode opcode
     switch(chip->opcode & 0xF000) {
-        int auxiliary_var;
+        int auxiliary_var, i;
         int x, y, vx, vy;
         unsigned int height, pixel_value;
         case 0x0000:
