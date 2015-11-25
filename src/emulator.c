@@ -198,6 +198,55 @@ void runChip(chip8* chip) {
                 break;
             }
         break;
+        case 0xF000:
+            switch(chip->opcode & 0x00FF) {
+                case 0x0007:        //FX07, sets VX to the value of the delay timer
+                    chip->v_reg[(chip->opcode & 0x0F00) >> 8] = chip->delay_timer;
+                    chip->pc += 2;
+                break;
+                case 0x000A:        //FX0A, a key press is awaited, and then stored in VX
+                    chip->pc += 2;
+                break;
+                case 0x0015:        //FX15, sets the delay timer to VX
+                    chip->delay_timer = chip->v_reg[(chip->opcode & 0x0F00) >> 8];
+                    chip->pc += 2;
+                break;
+                case 0x0018:        //FX18, sets the sound timer to VX
+                    chip->sound_timer = chip->v_reg[(chip->opcode & 0x0F00) >> 8];
+                    chip->pc += 2;
+                break;
+                case 0x001E:        //FX1E, adds VX to I
+                    chip->I += chip->v_reg[(chip->opcode & 0x0F00) >> 8];
+                    chip->pc += 2;
+                break;
+                case 0x0029:        //FX29, sets I to the location of the sprite for the character in VX. Characters 0-F (in hexadecimal) are represented by a 4x5 font
+                    chip->I = chip->v_reg[(chip->opcode & 0x0F00) >> 8] * 5;
+                    chip->pc += 2;
+                break;
+                case 0x0033:        //FX33, stores the Binary-coded decimal representation of VX, with the most significant of three digits at the address in I, the middle digit at I plus 1, and the least significant digit at I plus 2. (In other words, take the decimal representation of VX, place the hundreds digit in memory at location in I, the tens digit at location I+1, and the ones digit at location I+2.)
+                    chip->memory[chip->I] = chip->v_reg[(chip->opcode & 0x0F00) >> 8] / 100;
+                    chip->memory[chip->I+1] = (chip->v_reg[(chip->opcode & 0x0F00) >> 8] / 10) % 10;
+                    chip->memory[chip->I+2] = chip->v_reg[(chip->opcode & 0x0F00) >> 8] % 10;
+                    chip->pc += 2;
+                break;
+                case 0x0055:        //FX55, stores V0 to VX in memory starting at address I
+                    for(i = 0; i <= ((chip->opcode & 0x0F00) >> 8); i++) {
+                        chip->memory[chip->I+i] = chip->v_reg[i];
+                    }
+                    chip->pc += 2;
+                break;
+                case 0x0065:        //FX65, fills V0 to VX with values from memory starting at address I
+                    for(i = 0; i <= ((chip->opcode & 0x0F00) >> 8); i++) {
+                        chip->v_reg[i] = chip->memory[chip->I + i];
+                    }
+                    chip->pc += 2;
+                break;
+                default:
+                    printf("OPCode %04X is not supported...", chip->opcode);
+                    controlledExit(chip_addr, -2);
+                break;
+            }
+        break;
         default:
             unsupportedOpCode(chip->opcode);
         break;
