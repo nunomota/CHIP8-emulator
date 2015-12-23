@@ -35,18 +35,6 @@ int main() {
     return 0;
 }
 
-void requestRom(chip8* chip) {
-
-    char inputBuffer[MAX_INPUT_SIZE];
-
-    printf("ROM's path: ");
-    if (fgets(inputBuffer, MAX_INPUT_SIZE, stdin) != null) {
-        loadRomToChip(chip, inputBuffer);
-    } else {
-        error("Could not read user input");
-    }
-}
-
 void initChip(chip8* chip) {
     memset(chip->memory, 0, CHIP_MEMORY*sizeof(unsigned char));
     memset(chip->v_reg, 0, V_REGISTERS*sizeof(unsigned char));
@@ -61,6 +49,18 @@ void initChip(chip8* chip) {
     memset(chip->display, 0, DISPLAY_SIZE*sizeof(unsigned char));
     chip->display_width = DISPLAY_WIDTH;
     chip->display_height = DISPLAY_HEIGHT;
+}
+
+void requestRom(chip8* chip) {
+
+    char inputBuffer[MAX_INPUT_SIZE];
+
+    printf("ROM's path: ");
+    if (fgets(inputBuffer, MAX_INPUT_SIZE, stdin) != null) {
+        loadRomToChip(chip, inputBuffer);
+    } else {
+        error("Could not read user input");
+    }
 }
 
 void runChip(chip8* chip) {
