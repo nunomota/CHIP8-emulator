@@ -29,8 +29,8 @@ int main() {
 
     chip8 chip;
 
-    requestRom(&chip);
     initChip(&chip);
+    requestRom(&chip);
     runChip(&chip);
     return 0;
 }
