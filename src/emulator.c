@@ -68,8 +68,12 @@ void loadRomToChip(chip8* chip, char* romPath) {
     FILE* file;
 
     file = fopen(romPath, rb);
-    if (!file) error("Could not load specified file");
-
+    if (!file) {
+        error("Could not load specified file");
+    } else {
+        fread(chip->memory, 1, CHIP_MEMORY, file);
+    }
+    fclose(file);
 }
 
 void runChip(chip8* chip) {
