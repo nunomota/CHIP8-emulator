@@ -71,7 +71,7 @@ void loadRomToChip(chip8* chip, char* romPath) {
     if (!file) {
         error("Could not load specified file");
     } else {
-        fread(chip->memory, 1, CHIP_MEMORY, file);
+        if (fread(chip->memory, 1, CHIP_MEMORY, file) != CHIP_MEMORY) error("Error occurred while reading from ROM");
     }
     fclose(file);
 }
