@@ -67,7 +67,7 @@ void loadRomToChip(chip8* chip, char* romPath) {
 
     FILE* file;
 
-    file = fopen(romPath, rb);
+    file = fopen(romPath, "rb");
     if (!file) {
         error("Could not load specified file");
     } else {
