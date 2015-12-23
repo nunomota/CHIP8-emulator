@@ -309,6 +309,6 @@ void unsupportedOpCode(unsigned int opcode) {
 }
 
 void error(char* errorMessage) {
-    printf(errorMessage);
+    printf("%s", errorMessage);
     exit(0);
 }
