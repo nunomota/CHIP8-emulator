@@ -10,6 +10,8 @@
 #define DISPLAY_HEIGHT  32
 #define DISPLAY_SIZE    64*32
 
+#define MAX_INPUT_SIZE  256
+
 typedef struct {
     unsigned char memory[CHIP_MEMORY];
     unsigned char v_reg[V_REGISTERS];
