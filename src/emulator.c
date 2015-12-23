@@ -77,8 +77,17 @@ void loadRomToChip(chip8* chip, char* romPath) {
     fclose(file);
 }
 
+void initFrame() {
+
+    SDL_Init(SDL_INIT_EVERYTHING);
+    SDL_SetVideoMode(SCREEN_W, SCREEN_H, SCREEN_BPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
+}
+
 void runEmulator(chip8* chip) {
 
+    SDL_Event event;
+
+    initFrame();
     for(;;) {
         runChip(chip);
     }
