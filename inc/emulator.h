@@ -26,6 +26,7 @@ typedef struct {
     unsigned int display_height;
 } chip8;
 
+void requestRom(chip8* chip);
 void initChip(chip8* chip);
 void runChip(chip8* chip);
 void unsupportedOpCode(unsigned int opcode);
