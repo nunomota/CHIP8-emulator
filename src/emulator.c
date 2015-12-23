@@ -31,7 +31,7 @@ int main() {
 
     initChip(&chip);
     requestRom(&chip);
-    runChip(&chip);
+    runEmulator(&chip);
     return 0;
 }
 
@@ -75,6 +75,13 @@ void loadRomToChip(chip8* chip, char* romPath) {
         if (fread(chip->memory, 1, CHIP_MEMORY, file) != CHIP_MEMORY) error("Error occurred while reading from ROM");
     }
     fclose(file);
+}
+
+void runEmulator(chip8* chip) {
+
+    for(;;) {
+        runChip(chip);
+    }
 }
 
 void runChip(chip8* chip) {
