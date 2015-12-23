@@ -35,6 +35,14 @@ int main() {
     return 0;
 }
 
+void requestRom(chip8* chip) {
+
+    char inputBuffer[MAX_INPUT_SIZE];
+
+    printf("ROM's path: ");
+    fgets(inputBuffer, MAX_INPUT_SIZE, stdin);
+}
+
 void initChip(chip8* chip) {
     memset(chip->memory, 0, CHIP_MEMORY*sizeof(unsigned char));
     memset(chip->v_reg, 0, V_REGISTERS*sizeof(unsigned char));
