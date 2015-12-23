@@ -40,7 +40,11 @@ void requestRom(chip8* chip) {
     char inputBuffer[MAX_INPUT_SIZE];
 
     printf("ROM's path: ");
-    fgets(inputBuffer, MAX_INPUT_SIZE, stdin);
+    if (fgets(inputBuffer, MAX_INPUT_SIZE, stdin) != null) {
+        loadRomToChip(chip, inputBuffer);
+    } else {
+        error("Could not read user input");
+    }
 }
 
 void initChip(chip8* chip) {
