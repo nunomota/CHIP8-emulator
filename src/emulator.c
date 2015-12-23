@@ -294,3 +294,8 @@ void runChip(chip8* chip) {
 void unsupportedOpCode(unsigned int opcode) {
     printf("OP code %04X is not supported", opcode);
 }
+
+void error(char* errorMessage) {
+    printf(errorMessage);
+    exit(0);
+}
