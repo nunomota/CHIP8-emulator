@@ -31,6 +31,7 @@ typedef struct {
 void initChip(chip8* chip);
 void requestRom(chip8* chip);
 void loadRomToChip(chip8* chip, char* romPath);
+void initFrame();
 void runEmulator(chip8* chip);
 void runChip(chip8* chip);
 void unsupportedOpCode(unsigned int opcode);
