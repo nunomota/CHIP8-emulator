@@ -63,6 +63,15 @@ void requestRom(chip8* chip) {
     }
 }
 
+void loadRomToChip(chip8* chip, char* romPath) {
+
+    FILE* file;
+
+    file = fopen(romPath, rb);
+    if (!file) error("Could not load specified file");
+
+}
+
 void runChip(chip8* chip) {
 
     //fetch opcode
